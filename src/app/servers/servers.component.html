@@ -1,5 +1,13 @@
-<button class="btn btn-primary" [disabled]="!allowServer">Add Server</button>
+<label>Server</label>
+<!-- <input type="text" class="form-control" (input)="onUpdateServer($event)" > -->  <!-- Event binding -->
+<input type="text" class="form-control" [(ngModel)]="serverName" >
+<!-- <p> {{serverName}} </p> -->
+
+<button class="btn btn-primary" [disabled]="!allowServer" (click)="onCreateServer()" >Add Server</button>
 <!-- <p>{{allowServer}}</p> -->                     <!-- String interpolation -->
 <!-- <p [innerHTML]="allowServer" ></p> -->         <!-- Property binding -->
-<app-server></app-server>
-<app-server></app-server>
+<p *ngIf="flag; else noServer"> {{serverCreationStatus}} </p>
+<ng-template #noServer>
+    <p>no server was created</p>
+</ng-template>
+<app-server *ngFor="let server of servers"></app-server>
